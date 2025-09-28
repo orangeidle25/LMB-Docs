@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un moment...</title>
+    <title>Redirecting...</title>
     <script>
-        (function() {
-            const userLang = navigator.language || navigator.userLanguage;
+        const userLang = navigator.language.substring(0, 2);
 
-        if (userLang === 'fr') {
-                redirectUrl = 'https://docs.lamaisonblanche.ca/fr';
-        } else if (userLang === 'es') {
-                redirectUrl = 'https://docs.lamaisonblanche.ca/es';
-        } else {
-                redirectUrl = `https://docs.lamaisonblanche.ca/en`;
+        switch (userLang) {
+            case 'es':
+                window.location.href = 'https://docs.lamaisonblanche.ca/es';
+                break;
+            case 'fr':
+                window.location.href = 'https://docs.lamaisonblanche.ca/fr';
+                break;
+            default:
+                window.location.href = 'https://docs.lamaisonblanche.ca/en';
+                break;
         }
-        })();
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKC8CQS2Z9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-YKC8CQS2Z9');
     </script>
 </head>
 <body>
-    <p>Un moment...</p>
+    <p>Please wait, we are redirecting you to the correct documentation for your language...</p>
+    <p>Veuillez patienter, nous vous redirigeons vers la documentation adaptée à votre langue...</p>
+    <p>Por favor espere, lo estamos redirigiendo a la documentación correcta para su idioma...</p>
+    <br>
+    <a href="en.html">Click here for english</a>
+    <a href="fr.html">Cliquez ici pour le français</a>
+    <a href="es.html">Haga clic aquí para español</a>
 </body>
 </html>
