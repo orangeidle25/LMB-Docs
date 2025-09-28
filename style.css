@@ -1,0 +1,268 @@
+/* New professional black and white theme */
+:root {
+    --bg-color: #f0f0f0;         /* Light grey background for the page */
+    --viewer-bg: #ffffff;        /* White background for the PDF viewer area */
+    --controls-bg: #222222;      /* Dark background for controls */
+    --primary-accent: #007bff;   /* A subtle blue for active states/highlights - optional, can be pure white/black */
+    --text-color: #333333;       /* Dark grey for general text */
+    --light-text-color: #ffffff; /* White for text on dark backgrounds */
+    --border-color: #e0e0e0;     /* Light border for subtle separation */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+/* --- Header --- */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: black; /* Dark background */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 999;
+    box-shadow: 0 2px 8px var(--shadow-color); /* Subtle shadow */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle line */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img { /* Styling for your logo.png */
+    height: 36px; /* Adjust size as needed, maintain aspect ratio */
+    width: auto;
+}
+
+.logo-text {
+    font-size: 20px; /* Slightly smaller for professionalism */
+    font-weight: 500; /* Medium weight */
+    color: var(--light-text-color); /* White text on dark header */
+    letter-spacing: 0.8px; /* Refined spacing */
+}
+
+.language-toggle {
+    display: flex;
+    gap: 2px; /* Tighter gap */
+    background-color: #444444; /* Slightly lighter dark for the toggle background */
+    border-radius: 4px;
+    overflow: hidden; /* Ensures buttons fit well */
+}
+
+.lang-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px; /* Slightly wider */
+    height: 36px; /* Taller */
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7); /* Slightly faded white for inactive */
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 0; /* No rounded corners */
+}
+
+.lang-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+    color: var(--light-text-color);
+}
+
+/* Style for the active language button */
+body[data-lang="en"] #lang-en,
+body[data-lang="fr"] #lang-fr {
+    background-color: var(--light-text-color); /* White background for active */
+    color: var(--text-color); /* Dark text for active */
+    pointer-events: none;
+    font-weight: 600; /* Bolder for active */
+}
+
+
+/* --- Loader Animation --- */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+#loader:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px; /* Slightly smaller spinner */
+    height: 50px;
+    border: 4px solid var(--border-color); /* Lighter border */
+    border-top: 4px solid var(--text-color); /* Darker spinning part */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite; /* Faster spin */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Viewer --- */
+#pdf-viewer-container {
+    padding: 75px 20px 100px 20px; /* Adjusted padding for header and controls */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(10px); /* Subtle entry animation */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#pdf-viewer-container.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#canvas-container {
+    overflow: auto;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: var(--viewer-bg); /* White background for the canvas scroll area */
+    border-radius: 8px; /* Slightly rounded corners for the viewer */
+    box-shadow: 0 8px 25px var(--shadow-color); /* Professional shadow */
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-color) var(--viewer-bg); /* Dark scrollbar on white */
+}
+
+#pdf-canvas {
+    display: block;
+    background-color: #ffffff; /* Explicitly white for the canvas itself */
+    box-shadow: none; /* No extra shadow on canvas, container has it */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out; /* Smoother transitions */
+}
+
+/* --- Controls --- */
+#navigation-controls {
+    position: fixed;
+    bottom: 25px; /* Slightly higher from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--controls-bg); /* Dark background */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+    border-radius: 6px; /* Professional rectangular shape with slight rounding */
+    padding: 8px 15px; /* Tighter padding */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    opacity: 0;
+    animation: slideUp 0.6s 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+#navigation-controls button {
+    background-color: transparent;
+    border: none;
+    color: var(--light-text-color); /* White icons/text */
+    font-size: 20px; /* Slightly smaller icons */
+    font-weight: 500;
+    width: 38px;
+    height: 38px;
+    border-radius: 4px; /* Slight rounding for buttons */
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navigation-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover */
+    transform: scale(1.05); /* Gentle hover scale */
+    color: var(--primary-accent); /* Optional: use accent on hover */
+}
+
+#navigation-controls button:active {
+    transform: scale(0.98);
+}
+
+#page-info, #zoom-level {
+    font-size: 15px;
+    font-weight: 500;
+    min-width: 100px; /* Adjusted width */
+    text-align: center;
+    user-select: none;
+    color: var(--light-text-color); /* White text */
+}
+
+#zoom-level {
+    min-width: 55px; /* Adjusted width */
+}
+
+.spacer {
+    width: 1px;
+    height: 25px; /* Shorter spacer */
+    background-color: rgba(255, 255, 255, 0.15); /* Lighter divider */
+    margin: 0 8px; /* Tighter margin */
+}
+
+#page-container {
+    position: relative;
+    margin: 0 auto;
+}
+
+#annotation-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+#annotation-layer a {
+    position: absolute;
+    display: block;
+    border-radius: 2px;
+    pointer-events: auto;
+
+}
+
+#annotation-layer a:hover {
+    border: 1px solid rgba(0, 100, 255, 0.5);
+}

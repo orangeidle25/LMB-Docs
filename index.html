@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un moment...</title>
+    <script>
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+
+        if (userLang === 'fr') {
+                redirectUrl = 'https://docs.lamaisonblanche.ca/fr';
+        } else if (userLang === 'es') {
+                redirectUrl = 'https://docs.lamaisonblanche.ca/es';
+        } else {
+                redirectUrl = `https://docs.lamaisonblanche.ca/en`;
+        }
+        })();
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKC8CQS2Z9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-YKC8CQS2Z9');
+    </script>
+</head>
+<body>
+    <p>Un moment...</p>
+</body>
+</html>

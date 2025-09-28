@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Maison Blanche - Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YKC8CQS2Z9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-YKC8CQS2Z9');
+    </script>
+<script>
+    (function() {
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            const lang = document.documentElement.lang;
+            let redirectUrl;
+
+            if (lang === 'fr') {
+                redirectUrl = 'https://docs.lamaisonblanche.ca/mobile-fr';
+            } else {
+                redirectUrl = `https://docs.lamaisonblanche.ca/mobile-en`;
+            }
+
+            window.location.href = redirectUrl;
+        }
+    })();
+</script>
+</head>
+<body data-pdf-url="en-doc.pdf" data-lang="en">
+
+    <header id="main-header">
+        <div class="logo-container">
+            <img src="logo.png" alt="La Maison Blanche Logo" class="logo-img">
+            <span class="logo-text">La Maison Blanche</span>
+        </div>
+        <div>
+            <a href="en.html" style="color: white;">English</a>
+            <a href="fr.html" style="color: white;">Français</a>
+        </div>
+    </header>
+    <div id="loader" class="active">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="pdf-viewer-container">
+        <div id="canvas-container">
+            <canvas id="pdf-canvas"></canvas>
+        </div>
+    </div>
+
+    <div id="navigation-controls">
+        <button id="prev-page" title="Previous Page">&lt;</button>
+        <div id="page-info">
+            <span id="page-num-text">Page</span> <span id="page-num">0</span> <span id="page-count-text">of</span> <span id="page-count">0</span>
+        </div>
+        <button id="next-page" title="Next Page">&gt;</button>
+        
+        <div class="spacer"></div>
+
+        <button id="zoom-out" title="Zoom Out">-</button>
+        <span id="zoom-level">100%</span>
+        <button id="zoom-in" title="Zoom In">+</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
